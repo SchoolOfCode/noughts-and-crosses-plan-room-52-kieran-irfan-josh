@@ -1,7 +1,7 @@
 import React from "react";
 
-function Square(makeMove) {
-  return <div></div>;
+function Square() {
+  return <button>test</button>;
 }
 
 export default Square;

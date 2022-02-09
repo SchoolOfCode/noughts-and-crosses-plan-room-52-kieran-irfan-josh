@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-
+import Board from "../Board/Board";
 function Game() {
-  let board = [null, null, null, null, null, null, null, null, null];
-  const [board, setBoard] = useState(board);
+  let B = [null, null, null, null, null, null, null, null, null];
+  const [board, setBoard] = useState(B);
 
   const [xturn, setXturn] = useState(true);
 
@@ -12,19 +12,71 @@ function Game() {
         let newBoard = board.splice(index, 1, "X");
         setBoard(newBoard);
         setXturn(false);
+        // checkWinner();
+        console.log("x");
       } else if (xturn === false) {
         let newBoard = board.splice(index, 1, "O");
         setBoard(newBoard);
         setXturn(true);
+        // checkWinner();
+        console.log("o");
       }
     } else {
       alert("choose another square");
       console.log("choose another square");
     }
   }
-  function checkWinner(index) {}
+  // function checkWinner() {
+  //   for (let i = 0; i < board.length; i++) {
+  //     let topRow = board[0] + board[1] + board[2];
+  //     let topMiddle = board[3] + board[4] + board[5];
+  //     let topBottom = board[6] + board[7] + board[8];
+  //     let leftColumn = board[0] + board[3] + board[6];
+  //     let middleColumn = board[1] + board[4] + board[7];
+  //     let rightColumn = board[2] + board[5] + board[8];
+  //     let diagnal1 = board[2] + board[4] + board[6];
+  //     let diagnal2 = board[0] + board[4] + board[8];
+  //     if (board[i] === null) {
+  //       if (
+  //         (board[i] !== null && topRow === "XXX") ||
+  //         topMiddle === "XXX" ||
+  //         topMiddle === "XXX" ||
+  //         topBottom === "XXX" ||
+  //         leftColumn === "XXX" ||
+  //         middleColumn === "XXX" ||
+  //         rightColumn === "XXX" ||
+  //         diagnal1 === "XXX" ||
+  //         diagnal2 === "XXX"
+  //       ) {
+  //         alert("X Wins!");
+  //         console.log("X wins");
+  //       } else if (
+  //         (board[i] !== null && topRow === "OOO") ||
+  //         topMiddle === "OOO" ||
+  //         topMiddle === "OOO" ||
+  //         topBottom === "OOO" ||
+  //         leftColumn === "OOO" ||
+  //         middleColumn === "OOO" ||
+  //         rightColumn === "OOO" ||
+  //         diagnal1 === "OOO" ||
+  //         diagnal2 === "OOO"
+  //       ) {
+  //         alert("O Wins!");
+  //         console.log("O wins");
+  //       }
+  //     } else {
+  //       alert("DRAW");
+  //       console.log("draw");
+  //       setBoard(B);
+  //     }
+  //   }
+  // }
 
-  return <div>Game</div>;
+  return (
+    <div>
+      <Board makeMove={makeMove} />
+    </div>
+  );
 }
 
 export default Game;
