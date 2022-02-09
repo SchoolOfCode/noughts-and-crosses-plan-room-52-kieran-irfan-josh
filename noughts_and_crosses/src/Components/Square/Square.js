@@ -1,7 +1,13 @@
 import React from "react";
 
-function Square() {
-  return <button>test</button>;
+function Square({ value, onClick }) {
+  const style = value ? `squares ${value}` : `squares`;
+
+  return (
+    <button className={style} onClick={onClick}>
+      {value}
+    </button>
+  );
 }
 
 export default Square;

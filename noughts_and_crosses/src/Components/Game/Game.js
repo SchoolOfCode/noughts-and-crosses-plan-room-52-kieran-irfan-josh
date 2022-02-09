@@ -1,31 +1,85 @@
 import React, { useState } from "react";
 import Board from "../Board/Board";
-function Game() {
-  let B = [null, null, null, null, null, null, null, null, null];
-  const [board, setBoard] = useState(B);
+import calculateWinner from "../../Helper";
 
-  const [xturn, setXturn] = useState(true);
 
-  function makeMove(index) {
-    if (board[index] === null) {
-      if (xturn === true) {
-        let newBoard = board.splice(index, 1, "X");
-        setBoard(newBoard);
-        setXturn(false);
-        // checkWinner();
-        console.log("x");
-      } else if (xturn === false) {
-        let newBoard = board.splice(index, 1, "O");
-        setBoard(newBoard);
-        setXturn(true);
-        // checkWinner();
-        console.log("o");
-      }
-    } else {
-      alert("choose another square");
-      console.log("choose another square");
+
+const Game () => {
+    const [board, setBoard] = useState(Array(9).fill(null))
+    const [XTurn, setXTurn] = useState(true);
+    const winner = calculateWinner(board);
+    const currentPlayer = isXTurn ? "X" : "O";
+
+    const handleSquareClick = (index) => {
+        if (winner || board[index]) {
+            return;
+        }
+    
+
+    setBoard([
+        ...board.slice(0, index),
+        currentPlayer,
+        ...board.slice(index +1)
+    ]);
+    setXTurn(!XTurn);
+
+
+};
+    
+    return (
+        <div>
+        
+        
+        </div>
+);
     }
-  }
+
+// return (
+//     <>
+//       <h1>React Tic Tac Toe - With Hooks</h1>
+//       <Board squares={history[stepNumber]} onClick={handleClick} />
+//       <div className="info-wrapper">
+//         <div>
+//           <h3>History</h3>
+//           {renderMoves()}
+//         </div>
+//         <h3>{winner ? "Winner: " + winner : "Next Player: " + xO}</h3>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Game;
+
+
+
+
+// function Game() {
+//   let B = [null, null, null, null, null, null, null, null, null];
+//   const [board, setBoard] = useState(B);
+
+//   const [xturn, setXturn] = useState(true);
+
+//   function makeMove(index) {
+//     if (board[index] === null) {
+//       if (xturn === true) {
+//         let newBoard = board.splice(index, 1, "X");
+//         setBoard(newBoard);
+//         setXturn(false);
+//         // checkWinner();
+//         console.log("x");
+//       } else if (xturn === false) {
+//         let newBoard = board.splice(index, 1, "O");
+//         setBoard(newBoard);
+//         setXturn(true);
+//         // checkWinner();
+//         console.log("o");
+//       }
+//     } else {
+//       alert("choose another square");
+//       console.log("choose another square");
+//     }
+//   }
   // function checkWinner() {
   //   for (let i = 0; i < board.length; i++) {
   //     let topRow = board[0] + board[1] + board[2];
@@ -72,11 +126,11 @@ function Game() {
   //   }
   // }
 
-  return (
-    <div>
-      <Board makeMove={makeMove} />
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <Board makeMove={makeMove} />
+//     </div>
+//   );
+// }
 
 export default Game;
